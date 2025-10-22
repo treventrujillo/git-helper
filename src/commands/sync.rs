@@ -79,9 +79,9 @@ fn build_sync_plan(repo: &GitRepo, config: &ResolvedConfig, args: &SyncArgs) -> 
 
 fn apply_plan(
     repo: &GitRepo,
-    config: &ResolvedConfig,
+    _config: &ResolvedConfig,
     plan: &SyncPlan,
-    args: &SyncArgs,
+    _args: &SyncArgs,
 ) -> Result<()> {
     for op in &plan.ops {
         match op {
@@ -99,7 +99,7 @@ fn apply_plan(
                 repo.rebase_onto(src_branch, onto_branch, *non_interactive)?;
             }
             SyncOp::PushIfFastForward { branch, remote } => {
-                if let Err(e) = repo.push_if_ff(remote, branch) {
+                if let Err(_e) = repo.push_if_ff(remote, branch) {
                     warn!("push skipped for {} ({})", remote, branch);
                 }
             }

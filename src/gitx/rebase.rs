@@ -12,8 +12,8 @@ pub fn rebase_onto(
     repo.set_head(src_refname)?;
     repo.checkout_head(None)?;
 
-    let onto = repo.revparse_single(&format!("refs/heads/{onto_branch}"))?;
-    let upstream = repo.revparse_single(&format!("refs/heads/{src_branch}"))
+    let _onto = repo.revparse_single(&format!("refs/heads/{onto_branch}"))?;
+    let _upstream = repo.revparse_single(&format!("refs/heads/{src_branch}"))?;
 
     let mut rebase = repo
         .rebase(None, None, None, None)

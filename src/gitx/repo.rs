@@ -88,9 +88,9 @@ impl GitRepo {
 
     fn find_branch(&self, name: &str, kind: BranchType) -> Result<Oid> {
         let branch = self.inner.find_branch(name, kind)?;
-        Ok(branch
+        branch
             .get()
             .target()
-            .context(format!("{kind:?} branch has no target"))?)
+            .context(format!("{kind:?} branch has no target"))
     }
 }
