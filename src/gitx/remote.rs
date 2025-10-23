@@ -1,5 +1,6 @@
 use anyhow::{Context, Result};
 use git2::Repository;
+use tracing::info;
 
 pub fn fetch_prune(repo: &Repository, remote_name: &str) -> Result<()> {
     // Use git command directly to properly support SSH config
@@ -13,9 +14,16 @@ pub fn fetch_prune(repo: &Repository, remote_name: &str) -> Result<()> {
         .output()
         .context("failed to execute git fetch")?;
 
-    if !output.status.success() {
+    if !&output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
         anyhow::bail!("git fetch failed: {}", stderr);
+    }
+
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    if !stderr.is_empty() {
+        info!("fetched and pruned remote:\n{}", stderr);
+    } else {
+        info!("fetched and pruned remote: {}", remote_name);
     }
 
     Ok(())
