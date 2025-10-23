@@ -3,9 +3,8 @@ use indicatif::HumanDuration;
 use std::time::Instant;
 use tracing::info;
 
-pub fn print_plan(plan: &SyncPlan, dry_run: bool) {
-    let mode = if dry_run { "(dry-run)" } else { "" };
-    info!("sync plan {mode}:\n{}", plan);
+pub fn print_plan(plan: &SyncPlan) {
+    info!("sync plan:\n{}", plan);
 }
 
 #[allow(dead_code)]

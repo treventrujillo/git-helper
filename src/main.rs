@@ -8,7 +8,7 @@ mod util;
 
 #[derive(Parser)]
 struct Cli {
-    #[arg(global = true, long, default_value_t = true)]
+    #[arg(global = true, long, default_value_t = false)]
     dry_run: bool,
 
     #[arg(global = true, long)]

@@ -27,7 +27,7 @@ pub fn run_sync(args: SyncArgs) -> Result<()> {
 
     let plan = build_sync_plan(&repo, &config, &args)?;
 
-    print_plan(&plan, args.dry_run);
+    print_plan(&plan);
 
     if !args.dry_run {
         apply_plan(&repo, &config, &plan, &args)?;
