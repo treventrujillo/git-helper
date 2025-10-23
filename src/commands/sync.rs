@@ -46,7 +46,7 @@ fn build_sync_plan(repo: &GitRepo, config: &ResolvedConfig, args: &SyncArgs) -> 
     });
 
     let main = config.main.clone();
-    if !repo.is_ff_up_to_remote(&main)? {
+    if !repo.is_ff_up_to_remote(&main, &config.remote)? {
         plan.push(SyncOp::FastForward {
             branch: main.clone(),
         });

@@ -41,12 +41,12 @@ impl GitRepo {
         Ok(name.to_string())
     }
 
-    pub fn is_ff_up_to_remote(&self, branch: &str) -> Result<bool> {
+    pub fn is_ff_up_to_remote(&self, branch: &str, remote_name: &str) -> Result<bool> {
         let local = self
             .branch_tip(branch, BranchType::Local)
             .context("local branch tip")?;
         let remote = self
-            .branch_tip(branch, BranchType::Remote)
+            .branch_tip(&format!("{remote_name}/{branch}"), BranchType::Remote)
             .context("remote branch tip")?;
         let base = self.inner.merge_base(local, remote)?;
         Ok(base == remote) // remote is ancestor of local -> local contains remote

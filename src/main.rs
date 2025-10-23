@@ -33,6 +33,12 @@ enum Cmd {
 }
 
 fn main() -> anyhow::Result<()> {
+    // Initialize tracing subscriber for logging
+    tracing_subscriber::fmt()
+        .with_target(false)
+        .with_level(true)
+        .init();
+
     let cli = Cli::parse();
 
     match cli.cmd {
